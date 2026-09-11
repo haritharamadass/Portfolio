@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Haritha Ramadass — Data Engineer and Cloud Data Engineer. Data pipelines, cloud platforms, Spark, AWS, Databricks, Snowflake, Kafka, Airflow and dbt." />
+  <title>Haritha Ramadass | Data Engineer</title>
+
+  <style>
+    :root {
+      --bg: #080b10;
+      --bg-soft: #0d1219;
+      --panel: rgba(15, 21, 29, 0.78);
+      --panel-strong: #101720;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --line: rgba(255,255,255,.08);
+      --blue: #38bdf8;
+      --teal: #2dd4bf;
+      --white-soft: rgba(255,255,255,.65);
+      --shadow: 0 24px 70px rgba(0,0,0,.28);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 78% 8%, rgba(56,189,248,.09), transparent 28%),
+        radial-gradient(circle at 12% 42%, rgba(45,212,191,.055), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 82%);
+      z-index: -2;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(calc(100% - 28px), 1120px);
+      z-index: 100;
+      border: 1px solid var(--line);
+      background: rgba(8,11,16,.72);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      padding: 10px 14px 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      white-space: nowrap;
+    }
+
+    .brand span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .menu-btn {
+      display: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 60px;
+      align-items: center;
+      padding: 130px 0 80px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      line-height: .94;
+      letter-spacing: -.065em;
+      max-width: 760px;
+    }
+
+    h1 .accent {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(241,245,249,.48);
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-top: 28px;
+    }
+
+    .tech-line {
+      margin-top: 22px;
+      color: var(--white-soft);
+      font-size: .84rem;
+      letter-spacing: .04em;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-size: .82rem;
+      font-weight: 750;
+      transition: .25s ease;
+    }
+
+    .btn.primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56,189,248,.5);
+    }
+
+    .architecture {
+      position: relative;
+      min-height: 510px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),
+        rgba(8,11,16,.72);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .architecture::before {
+      content: "DATA SYSTEM / LIVE VIEW";
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      color: rgba(148,163,184,.6);
+      font-size: .63rem;
+      letter-spacing: .18em;
+    }
+
+    .arch-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56,189,248,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+    }
+
+    .arch-node {
+      position: absolute;
+      width: 170px;
+      padding: 14px 15px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(16,23,32,.9);
+      border-radius: 15px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      z-index: 2;
+    }
+
+    .arch-node small {
+      display: block;
+      color: var(--muted);
+      font-size: .62rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 3px;
+    }
+
+    .arch-node strong { font-size: .82rem; }
+
+    .n1 { top: 92px; left: 10%; }
+    .n2 { top: 92px; right: 10%; }
+    .n3 { top: 220px; left: 50%; transform: translateX(-50%); }
+    .n4 { bottom: 88px; left: 10%; }
+    .n5 { bottom: 88px; right: 10%; }
+
+    .connector {
+      position: absolute;
+      background: linear-gradient(90deg, rgba(56,189,248,.05), rgba(56,189,248,.7), rgba(45,212,191,.35));
+      height: 1px;
+      transform-origin: left center;
+      z-index: 1;
+    }
+
+    .c1 { width: 210px; top: 155px; left: 29%; transform: rotate(24deg); }
+    .c2 { width: 210px; top: 155px; right: 28%; transform: rotate(156deg); }
+    .c3 { width: 175px; top: 310px; left: 26%; transform: rotate(-24deg); }
+    .c4 { width: 175px; top: 310px; right: 25%; transform: rotate(204deg); }
+
+    .pulse {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 18px rgba(56,189,248,.8);
+      animation: flow 4.5s linear infinite;
+      z-index: 3;
+    }
+
+    .p1 { top: 154px; left: 29%; }
+    .p2 { top: 154px; right: 28%; animation-delay: 1.2s; }
+    .p3 { top: 307px; left: 27%; animation-delay: 2.2s; }
+    .p4 { top: 307px; right: 26%; animation-delay: 3.1s; }
+
+    @keyframes flow {
+      0% { opacity: 0; transform: scale(.7); }
+      15% { opacity: 1; }
+      70% { opacity: 1; transform: scale(1.15); }
+      100% { opacity: 0; transform: scale(.7); }
+    }
+
+    section { padding: 105px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      color: var(--blue);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .section-description {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255,255,255,.025);
+    }
+
+    .metric {
+      padding: 30px 22px;
+      min-height: 145px;
+      border-right: 1px solid var(--line);
+    }
+
+    .metric:last-child { border-right: 0; }
+
+    .metric strong {
+      display: block;
+      font-size: 2rem;
+      letter-spacing: -.04em;
+      margin-bottom: 7px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .pipeline-step {
+      padding: 25px 18px;
+      min-height: 155px;
+      border-right: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+      position: relative;
+    }
+
+    .pipeline-step:last-child { border-right: 0; }
+
+    .pipeline-step::after {
+      content: "→";
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--bg);
+      color: var(--blue);
+      z-index: 3;
+    }
+
+    .pipeline-step:last-child::after { display: none; }
+
+    .pipeline-num {
+      font-size: .65rem;
+      color: var(--blue);
+      letter-spacing: .15em;
+    }
+
+    .pipeline-step h3 {
+      margin-top: 20px;
+      font-size: .92rem;
+    }
+
+    .pipeline-step p {
+      color: var(--muted);
+      font-size: .72rem;
+      margin-top: 5px;
+    }
+
+    .projects {
+      display: grid;
+      gap: 18px;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 90px 1fr 230px;
+      gap: 30px;
+      align-items: center;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+      transition: .3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56,189,248,.28);
+      box-shadow: var(--shadow);
+    }
+
+    .project-num {
+      color: var(--blue);
+      font-size: .75rem;
+      letter-spacing: .16em;
+      font-weight: 800;
+    }
+
+    .project h3 {
+      font-size: 1.35rem;
+      letter-spacing: -.025em;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: .82rem;
+      margin-top: 8px;
+      max-width: 680px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 13px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: .63rem;
+      color: var(--white-soft);
+    }
+
+    .project-action { text-align: right; }
+
+    .project-action a {
+      color: var(--blue);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+    }
+
+    .project-action a:hover { text-decoration: underline; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .panel h3 {
+      font-size: 1rem;
+      margin-bottom: 18px;
+    }
+
+    .timeline {
+      border-left: 1px solid rgba(56,189,248,.35);
+      padding-left: 22px;
+    }
+
+    .role {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .role:last-child { margin-bottom: 0; }
+
+    .role::before {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      left: -27px;
+      top: 9px;
+      box-shadow: 0 0 15px rgba(56,189,248,.65);
+    }
+
+    .role-date {
+      color: var(--blue);
+      font-size: .67rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .role h3 { margin: 4px 0; }
+
+    .role p, .role li {
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .role ul {
+      margin: 10px 0 0 17px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .skill {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+      border-radius: 11px;
+      font-size: .75rem;
+      color: var(--white-soft);
+    }
+
+    .skill:hover {
+      border-color: rgba(45,212,191,.35);
+      color: var(--text);
+    }
+
+    .credentials {
+      display: grid;
+      gap: 12px;
+    }
+
+    .credential {
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.02);
+    }
+
+    .credential strong {
+      display: block;
+      font-size: .84rem;
+    }
+
+    .credential span {
+      color: var(--muted);
+      font-size: .72rem;
+    }
+
+
+    .ai-box {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(56,189,248,.20);
+      border-radius: 30px;
+      padding: clamp(28px, 5vw, 54px);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(56,189,248,.10), transparent 34%),
+        radial-gradient(circle at 85% 80%, rgba(37,99,235,.08), transparent 32%),
+        linear-gradient(145deg, rgba(16,24,36,.94), rgba(8,14,23,.96));
+      box-shadow: 0 30px 90px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .ai-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+      opacity: .45;
+    }
+
+    .ai-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .ai-intro {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .ai-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 16px;
+      border: 1px solid rgba(56,189,248,.30);
+      border-radius: 999px;
+      background: rgba(14,38,65,.52);
+      color: #7dd3fc;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      margin-bottom: 20px;
+      box-shadow: 0 0 28px rgba(56,189,248,.08);
+    }
+
+    .ai-pill-icon {
+      display: grid;
+      place-items: center;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      background: rgba(56,189,248,.12);
+      font-size: .9rem;
+    }
+
+    .ai-intro h2 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+      margin-bottom: 18px;
+    }
+
+    .ai-intro h2 span {
+      color: var(--blue);
+      text-shadow: 0 0 32px rgba(56,189,248,.18);
+    }
+
+    .ai-intro p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: #a8b4c7;
+      font-size: clamp(.95rem, 2vw, 1.18rem);
+      line-height: 1.75;
+    }
+
+    .ai-console {
+      border: 1px solid rgba(148,163,184,.16);
+      border-radius: 24px;
+      padding: clamp(20px, 3vw, 30px);
+      background: rgba(8,14,22,.66);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+    }
+
+    .try-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .try-label {
+      color: #9fb0c7;
+      font-size: .95rem;
+      font-weight: 600;
+      margin-right: 2px;
+    }
+
+    .question {
+      border: 1px solid rgba(56,189,248,.20);
+      background: rgba(15,31,48,.72);
+      color: #b8c8dc;
+      padding: 9px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: .75rem;
+      transition: .2s ease;
+    }
+
+    .question:hover {
+      color: #e8f7ff;
+      border-color: rgba(56,189,248,.48);
+      background: rgba(20,47,70,.85);
+      transform: translateY(-1px);
+    }
+
+    .assistant-input {
+      display: flex;
+      gap: 10px;
+      margin: 0 0 20px;
+    }
+
+    .assistant-input input {
+      min-width: 0;
+      flex: 1;
+      padding: 17px 18px;
+      border: 1px solid rgba(56,189,248,.14);
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    .assistant-input input::placeholder {
+      color: #718096;
+    }
+
+    .assistant-input input:focus {
+      border-color: rgba(56,189,248,.45);
+      box-shadow: 0 0 0 4px rgba(56,189,248,.06);
+    }
+
+    .assistant-input .btn {
+      min-width: 104px;
+      border-radius: 15px;
+    }
+
+    .ai-response-card {
+      border: 1px solid rgba(56,189,248,.13);
+      border-radius: 20px;
+      padding: 22px;
+      background: linear-gradient(145deg, rgba(17,31,47,.82), rgba(10,19,30,.88));
+    }
+
+    .ai-response-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .ai-avatar {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(56,189,248,.45);
+      background: radial-gradient(circle, rgba(56,189,248,.24), rgba(14,34,53,.9));
+      color: #e0f7ff;
+      font-size: 1.05rem;
+      box-shadow: 0 0 22px rgba(56,189,248,.10);
+    }
+
+    .ai-response-head strong {
+      display: block;
+      font-size: .9rem;
+    }
+
+    .ai-response-head span {
+      color: #7890ab;
+      font-size: .72rem;
+    }
+
+    .ai-response {
+      margin-left: 54px;
+      padding: 17px 19px;
+      border: 1px solid rgba(148,163,184,.13);
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+      color: #c7d3e3;
+      font-size: .88rem;
+      line-height: 1.75;
+    }
+
+    .ai-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 20px 0 0;
+      padding-top: 17px;
+      border-top: 1px solid rgba(148,163,184,.10);
+      color: #7890ab;
+      font-size: .72rem;
+      line-height: 1.6;
+    }
+
+    .ai-note-icon {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(148,163,184,.30);
+      border-radius: 50%;
+      font-size: .68rem;
+    }
+
+    .next-build-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+      overflow: hidden;
+    }
+
+    .next-build-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .next-build-badge {
+      display: inline-flex;
+      padding: 7px 12px;
+      border: 1px solid rgba(56,189,248,.25);
+      border-radius: 999px;
+      color: var(--blue);
+      background: rgba(56,189,248,.06);
+      font-size: .65rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .next-build-top h3 {
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      letter-spacing: -.04em;
+      margin-bottom: 10px;
+    }
+
+    .next-build-top p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.75;
+    }
+
+    .next-build-status {
+      color: var(--muted);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding-top: 4px;
+      white-space: nowrap;
+    }
+
+    .next-build-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .next-step {
+      position: relative;
+      min-height: 150px;
+      padding: 24px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .next-step:last-child { border-right: 0; }
+
+    .next-step::after {
+      content: "→";
+      position: absolute;
+      right: -7px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--blue);
+      background: var(--bg);
+      z-index: 2;
+      font-size: 1rem;
+    }
+
+    .next-step:last-child::after { display: none; }
+
+    .next-step-num {
+      display: block;
+      color: var(--blue);
+      font-size: .62rem;
+      letter-spacing: .15em;
+      margin-bottom: 24px;
+    }
+
+    .next-step strong {
+      display: block;
+      font-size: .9rem;
+      margin-bottom: 7px;
+    }
+
+    .next-step span {
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.5;
+    }
+
+    .ai-footer-line {
+      text-align: center;
+      margin-top: 46px;
+      color: #91a3bb;
+      font-size: .82rem;
+    }
+
+    .ai-footer-line::after {
+      content: "";
+      display: block;
+      width: 74px;
+      height: 2px;
+      margin: 13px auto 0;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      box-shadow: 0 0 14px rgba(56,189,248,.5);
+    }
+
+
+    .contact {
+      text-align: center;
+      padding-bottom: 70px;
+    }
+
+    .contact h2 { max-width: 760px; margin: 0 auto; }
+
+    .contact p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 18px auto 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 25px 0 35px;
+      color: rgba(148,163,184,.65);
+      font-size: .7rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+      .architecture { min-height: 450px; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .metric:nth-child(2), .metric:nth-child(4) { border-right: 0; }
+      .metric { border-bottom: 1px solid var(--line); }
+      .pipeline { grid-template-columns: repeat(3, 1fr); }
+      .pipeline-step:nth-child(3) { border-right: 0; }
+      .pipeline-step:nth-child(3)::after { display: none; }
+      .project { grid-template-columns: 55px 1fr; }
+      .project-action { grid-column: 2; text-align: left; }
+      .two-col { grid-template-columns: 1fr; }
+      .ai-response { margin-left: 0; }
+      .try-row { gap: 8px; }
+    }
+
+    @media (max-width: 650px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      section { padding: 75px 0; }
+      .nav { border-radius: 17px; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        padding: 16px;
+        border: 1px solid var(--line);
+        background: rgba(8,11,16,.96);
+        border-radius: 17px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .hero { padding-top: 120px; }
+      h1 { font-size: clamp(3rem, 17vw, 5rem); }
+      .architecture { min-height: 420px; }
+      .arch-node { width: 145px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .metric { border-right: 0; }
+      .pipeline { grid-template-columns: 1fr 1fr; }
+      .pipeline-step { border-right: 0; border-bottom: 1px solid var(--line); }
+      .pipeline-step::after { display: none; }
+      .project { padding: 22px; gap: 15px; }
+      .project h3 { font-size: 1.08rem; }
+      .next-build-top { flex-direction: column; }
+      .next-build-status { padding-top: 0; }
+      .next-build-flow { grid-template-columns: 1fr; }
+      .next-step { border-right: 0; border-bottom: 1px solid var(--line); min-height: auto; }
+      .next-step:last-child { border-bottom: 0; }
+      .next-step::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -9px; transform: translateX(-50%); }
+      .next-step:last-child::after { display: none; }
+      footer { flex-direction: column; }
+      .ai-box { border-radius: 22px; padding: 22px 16px; }
+      .ai-console { border-radius: 18px; padding: 16px; }
+      .assistant-input { flex-direction: column; }
+      .assistant-input .btn { width: 100%; }
+      .ai-response-card { padding: 18px; }
+      .ai-intro h2 { font-size: clamp(2.5rem, 14vw, 4rem); }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="brand" href="#home">HARITHA RAMADASS</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Stack</a>
+      <a href="#ai">AI Assistant</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </nav>
+
+  <main>
+    <section class="hero container" id="home">
+      <div class="reveal">
+        <div class="eyebrow">Data Engineering / Cloud</div>
+        <h1>
+          DATA ENGINEER
+          <span class="accent">BUILDING SYSTEMS THAT SCALE.</span>
+        </h1>
+        <p class="hero-copy">
+          I build scalable data pipelines, cloud data platforms and reliable
+          data solutions that turn raw data into trusted, analytics-ready information.
+        </p>
+        <p class="tech-line">
+          Python · SQL · PySpark · Spark · AWS · Databricks · Snowflake · Kafka · Airflow · dbt
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">View Projects ↓</a>
+          <a class="btn" href="Haritha_Ramadass_CV.pdf" download>Download CV ↓</a>
+          <a class="btn" href="https://github.com/haritharamadass" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn" href="https://www.linkedin.com/in/haritha-ramadass-804a82192" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+
+      <div class="architecture reveal" aria-label="Data engineering architecture">
+        <div class="arch-grid"></div>
+        <div class="arch-node n1"><small>01 / Source</small><strong>Data Sources</strong></div>
+        <div class="arch-node n2"><small>02 / Ingest</small><strong>Kafka · AWS</strong></div>
+        <div class="arch-node n3"><small>03 / Process</small><strong>PySpark · Spark</strong></div>
+        <div class="arch-node n4"><small>04 / Platform</small><strong>Databricks</strong></div>
+        <div class="arch-node n5"><small>05 / Warehouse</small><strong>Snowflake</strong></div>
+        <div class="connector c1"></div>
+        <div class="connector c2"></div>
+        <div class="connector c3"></div>
+        <div class="connector c4"></div>
+        <div class="pulse p1"></div>
+        <div class="pulse p2"></div>
+        <div class="pulse p3"></div>
+        <div class="pulse p4"></div>
+      </div>
+    </section>
+
+    <section class="container reveal" id="about">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 / Engineering impact</div>
+          <h2>Built for scale.<br>Measured by outcomes.</h2>
+        </div>
+        <p class="section-description">
+          Experience across large-scale data processing, cloud migration,
+          orchestration, streaming, transformation and data quality.
+        </p>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><strong>3+</strong><span>Years engineering experience</span></div>
+        <div class="metric"><strong>1TB+</strong><span>Healthcare data / week</span></div>
+        <div class="metric"><strong>10+</strong><span>Airflow DAGs</span></div>
+        <div class="metric"><strong>~30%</strong><span>Streaming latency reduction</span></div>
+        <div class="metric"><strong>~25%</strong><span>Processing-time reduction</span></div>
+      </div>
+    </section>
+
+    <section class="container reveal">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">02 / Data flow</div>
+          <h2>From raw data<br>to trusted insight.</h2>
+        </div>
+        <p class="section-description">
+          The engineering patterns behind my work: ingestion, distributed
+          processing, transformation, cloud platforms, quality and analytics.
+        </p>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipeline-step"><span class="pipeline-num">01</span><h3>Sources</h3><p>Files, APIs & operational data</p></div>
+        <div class="pipeline-step"><span class="pipeline-num">02</span><h3>Ingestion</h3><p>AWS S3 · Kafka</p></div>
+        <div class="pipeline-step"><span class="pipeline-num">03</span><h3>Processing</h3><p>PySpark · Spark SQL</p></div>
+        <div class="pipeline-step"><span class="pipeline-num">04</span><h3>Transform</h3><p>dbt · SQL</p></div>
+        <div class="pipeline-step"><span class="pipeline-num">05</span><h3>Platform</h3><p>Databricks · Snowflake</p></div>
+        <div class="pipeline-step"><span class="pipeline-num">06</span><h3>Analytics</h3><p>SQL · Power BI</p></div>
+      </div>
+    </section>
+
+    <section class="container reveal" id="projects">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">03 / Featured work</div>
+          <h2>Engineering<br>in practice.</h2>
+        </div>
+        <p class="section-description">
+          Selected projects that demonstrate cloud data engineering,
+          orchestration, warehousing and distributed analytics.
+        </p>
+      </div>
+
+      <div class="projects">
+        <article class="project">
+          <div class="project-num">01</div>
+          <div>
+            <h3>Airbnb Data Engineering Platform</h3>
+            <p>A cloud data engineering project combining AWS, Snowflake and dbt, with a focus on structured transformation and analytics-ready data.</p>
+            <div class="tags"><span class="tag">AWS</span><span class="tag">Snowflake</span><span class="tag">dbt</span><span class="tag">SQL</span></div>
+          </div>
+          <div class="project-action"><a href="https://github.com/haritharamadass/Airbnb_Snowflake_DBT_Data_Engineer_Project" target="_blank" rel="noopener">VIEW REPOSITORY ↗</a></div>
+        </article>
+
+        <article class="project">
+          <div class="project-num">02</div>
+          <div>
+            <h3>Airflow Flight Operations Analysis</h3>
+            <p>Pipeline-oriented analytics project using Apache Airflow, Python and Docker, demonstrating workflow orchestration and repeatable data processing.</p>
+            <div class="tags"><span class="tag">Airflow</span><span class="tag">Python</span><span class="tag">Docker</span><span class="tag">SQL</span></div>
+          </div>
+          <div class="project-action"><a href="https://github.com/haritharamadass/Airflow_Flight_Operations_Analysis" target="_blank" rel="noopener">VIEW REPOSITORY ↗</a></div>
+        </article>
+
+        <article class="project">
+          <div class="project-num">03</div>
+          <div>
+            <h3>Snowflake Hotel Booking Analysis</h3>
+            <p>Cloud data warehouse project focused on processing and analytical SQL workflows around hotel booking data.</p>
+            <div class="tags"><span class="tag">Snowflake</span><span class="tag">SQL</span><span class="tag">Data Warehouse</span></div>
+          </div>
+          <div class="project-action"><a href="https://github.com/haritharamadass/Snowflake_Hotel_Booking_Analysis" target="_blank" rel="noopener">VIEW REPOSITORY ↗</a></div>
+        </article>
+
+        <article class="project">
+          <div class="project-num">04</div>
+          <div>
+            <h3>PySpark Multi-Dimensional Analytics</h3>
+            <p>Distributed analytics project using PySpark and Spark SQL, demonstrating large-scale data processing and multidimensional analytical techniques.</p>
+            <div class="tags"><span class="tag">PySpark</span><span class="tag">Spark SQL</span><span class="tag">Distributed Processing</span></div>
+          </div>
+          <div class="project-action"><a href="https://github.com/haritharamadass/PySpark-Enabled-Multi-Dimensional-Analytics" target="_blank" rel="noopener">VIEW REPOSITORY ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container reveal" id="experience">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">04 / Experience</div>
+          <h2>Production thinking,<br>not just projects.</h2>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="timeline">
+          <div class="role">
+            <div class="role-date">Sep 2022 — Aug 2025</div>
+            <h3>Cognizant · Data Engineer</h3>
+            <p>Data engineering delivery across healthcare-focused environments.</p>
+            <ul>
+              <li>Built and supported data pipelines processing 1TB+ of healthcare data weekly using PySpark/Spark.</li>
+              <li>Worked with Kafka streaming, Databricks Delta Lake and Medallion Architecture.</li>
+              <li>Supported migration of on-premises workloads to AWS S3, Glue and Redshift.</li>
+              <li>Developed and maintained 10+ Airflow DAGs for workflow orchestration.</li>
+              <li>Built dbt transformation models and data-quality checks for downstream teams.</li>
+              <li>Used CDC and incremental-loading patterns to reduce processing time.</li>
+            </ul>
+          </div>
+
+          <div class="role">
+            <div class="role-date">Jul 2026 — Sep 2026</div>
+            <h3>FlyRank · AI Intern</h3>
+            <p>Applied AI/data analytics internship focused on an analytical search-intelligence capstone and supporting project work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container reveal" id="skills">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">05 / Engineering stack</div>
+          <h2>The tools behind<br>the systems.</h2>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h3>Data Engineering</h3>
+          <div class="skills">
+            <span class="skill">Python</span><span class="skill">SQL</span><span class="skill">Spark</span>
+            <span class="skill">PySpark</span><span class="skill">Spark SQL</span><span class="skill">Kafka</span>
+            <span class="skill">Airflow</span><span class="skill">dbt</span><span class="skill">ETL / ELT</span>
+            <span class="skill">CDC</span><span class="skill">Incremental Loading</span>
+            <span class="skill">Dimensional Modelling</span><span class="skill">Data Quality</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Cloud & Platforms</h3>
+          <div class="skills">
+            <span class="skill">AWS S3</span><span class="skill">AWS Glue</span><span class="skill">Redshift</span>
+            <span class="skill">Athena</span><span class="skill">EMR</span><span class="skill">Lambda</span>
+            <span class="skill">IAM</span><span class="skill">CloudWatch</span><span class="skill">Databricks</span>
+            <span class="skill">Delta Lake</span><span class="skill">Snowflake</span><span class="skill">Docker</span>
+            <span class="skill">GitHub Actions</span><span class="skill">CI/CD</span><span class="skill">Kubernetes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container reveal">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">06 / Credentials</div>
+          <h2>Education &<br>certifications.</h2>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h3>Education</h3>
+          <div class="credentials">
+            <div class="credential">
+              <strong>MSc Computing — Data Analytics</strong>
+              <span>Dublin City University · 2025–2026</span>
+            </div>
+            <div class="credential">
+              <strong>B.Tech Computer Science & Engineering</strong>
+              <span>Manakula Vinayagar Institute · 2018–2022</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Certifications</h3>
+          <div class="credentials">
+            <div class="credential"><strong>AWS Certified Data Engineer — Associate</strong><span>AWS</span></div>
+            <div class="credential"><strong>AWS Certified Solutions Architect — Associate</strong><span>AWS</span></div>
+            <div class="credential"><strong>AWS Certified Cloud Practitioner</strong><span>AWS</span></div>
+            <div class="credential"><strong>AWS Partner Technical Accreditation</strong><span>AWS</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container reveal" id="ai">
+      <div class="ai-box">
+        <div class="ai-inner">
+          <div class="ai-intro">
+            <div class="ai-pill">
+              <span class="ai-pill-icon">✦</span>
+              <span>AI ASSISTANT</span>
+            </div>
+            <h2>Ask Me <span>Anything</span></h2>
+            <p>
+              A personal assistant for my portfolio — ask about my experience,
+              projects, skills, education, certifications or career goals.
+            </p>
+          </div>
+
+          <div class="ai-console">
+            <div class="try-row">
+              <span class="try-label">Try asking:</span>
+              <button class="question" type="button">What is your experience with AWS?</button>
+              <button class="question" type="button">Tell me about your projects</button>
+              <button class="question" type="button">What certifications do you have?</button>
+              <button class="question" type="button">What is your experience with PySpark?</button>
+              <button class="question" type="button">Tell me about your work at Cognizant</button>
+              <button class="question" type="button">What roles are you looking for?</button>
+            </div>
+
+            <div class="assistant-input">
+              <input
+                id="aiInput"
+                type="text"
+                placeholder="Ask a question about my experience, projects, skills, or background..."
+                aria-label="Ask the AI Assistant"
+              >
+              <button id="aiAsk" class="btn primary" type="button">Ask ↗</button>
+            </div>
+
+            <div class="ai-response-card">
+              <div class="ai-response-head">
+                <div class="ai-avatar">✦</div>
+                <div>
+                  <strong>AI Assistant</strong>
+                  <span>Portfolio knowledge</span>
+                </div>
+              </div>
+
+              <div class="ai-response" id="aiResponse">
+                Feel free to ask me about Haritha's background, skills, projects,
+                experience, certifications or career goals. I'll answer using
+                information from this portfolio.
+              </div>
+
+              <div class="ai-note">
+                <span class="ai-note-icon">i</span>
+                <span>This assistant uses information from my portfolio. If I don't have the answer, I'll let you know.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-footer-line">Let's build something great together!</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container reveal" id="next-build">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">07 / Next build</div>
+          <h2>Keep building.<br>Ship what comes next.</h2>
+        </div>
+        <p class="section-description">
+          The current portfolio assistant is a controlled JavaScript feature.
+          The next iteration will turn it into a genuinely AI-powered experience,
+          grounded in the same portfolio knowledge.
+        </p>
+      </div>
+
+      <div class="next-build-card">
+        <div class="next-build-top">
+          <div>
+            <div class="next-build-badge">Coming next</div>
+            <h3>AI-Powered Portfolio Assistant</h3>
+            <p>
+              Move from predefined responses to retrieval and an LLM, so visitors
+              can ask natural questions and receive answers grounded in my projects,
+              skills, experience, and career story.
+            </p>
+          </div>
+          <div class="next-build-status">Planned · December 2026</div>
+        </div>
+
+        <div class="next-build-flow">
+          <div class="next-step"><span class="next-step-num">CURRENT / 01</span><strong>AI Assistant</strong><span>Interactive portfolio feature</span></div>
+          <div class="next-step"><span class="next-step-num">02</span><strong>Portfolio knowledge</strong><span>Structured facts about my work</span></div>
+          <div class="next-step"><span class="next-step-num">03</span><strong>Retrieval</strong><span>Find the most relevant context</span></div>
+          <div class="next-step"><span class="next-step-num">04</span><strong>LLM</strong><span>Generate grounded natural answers</span></div>
+          <div class="next-step"><span class="next-step-num">TARGET / 05</span><strong>Natural answers</strong><span>Useful responses for portfolio visitors</span></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="contact container reveal" id="contact">
+      <div class="section-kicker">08 / Contact</div>
+      <h2>Let's build reliable<br>data systems.</h2>
+      <p>Open to Data Engineer and Cloud Data Engineer opportunities.</p>
+      <div class="actions" style="justify-content:center;">
+        <a class="btn primary" href="mailto:haritha0849@gmail.com">Email Me</a>
+        <a class="btn" href="Haritha_Ramadass_CV.pdf" download>Download CV ↓</a>
+        <a class="btn" href="https://github.com/haritharamadass" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://www.linkedin.com/in/haritha-ramadass-804a82192" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span>© 2026 Haritha Ramadass</span>
+    <span>Data Engineering · Cloud · Analytics</span>
+    <a href="https://internship.flyrank.ai/verify?id=&first_name=" target="_blank" rel="noopener">@FlyRank</a>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    navLinks.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    const response = document.getElementById("aiResponse");
+    const aiInput = document.getElementById("aiInput");
+    const aiAsk = document.getElementById("aiAsk");
+
+    // Lightweight portfolio knowledge base. It runs locally, so no API key or private data is exposed.
+    const knowledge = [
+      { keys: ["focus","role","career","technical","data engineer","cloud"], answer: "Haritha's focus is Data Engineering and Cloud Data Engineering. Her core stack includes Python, SQL, PySpark, Spark, Kafka, Airflow, dbt, Databricks, Snowflake and AWS." },
+      { keys: ["aws","amazon","cloud","s3","glue","redshift","lambda"], answer: "Haritha has hands-on AWS experience across S3, Glue, Redshift, Athena, EMR, Lambda, IAM and CloudWatch, including work moving data from on-premises environments into AWS." },
+      { keys: ["pyspark","spark","big data","processing"], answer: "Haritha has used PySpark and Spark for large-scale data processing, including pipelines handling 1TB+ of healthcare data weekly, plus Spark SQL, tuning, partitioning, caching and broadcast joins." },
+      { keys: ["kafka","streaming","real time","realtime"], answer: "Haritha has worked with Kafka for near-real-time data streaming. One project reduced streaming latency by approximately 30%." },
+      { keys: ["airflow","dag","orchestration"], answer: "Haritha has built and maintained Airflow orchestration patterns, including 10+ DAGs for scheduled and dependency-aware data workflows." },
+      { keys: ["dbt","transformation","data quality"], answer: "Haritha has used dbt for declarative transformations and data-quality practices supporting 3+ downstream teams." },
+      { keys: ["databricks","delta","lakehouse","medallion"], answer: "Haritha has worked with Databricks and Delta Lake using Medallion Architecture across multiple reporting datasets." },
+      { keys: ["snowflake","airbnb","hotel"], answer: "Featured Snowflake work includes an Airbnb Snowflake/dbt project and a Snowflake Hotel Booking Analysis project." },
+      { keys: ["projects","project","portfolio","built"], answer: "Featured projects include Airbnb Snowflake/dbt Data Engineering, Airflow Flight Operations Analysis, Snowflake Hotel Booking Analysis and PySpark Multi-Dimensional Analytics." },
+      { keys: ["cognizant","experience","work"], answer: "At Cognizant, Haritha worked on scalable data pipelines, Spark/PySpark processing, Kafka streaming, AWS migration, Airflow orchestration, dbt transformations and data-quality practices." },
+      { keys: ["certification","certifications","certificate","aws certified"], answer: "Haritha's certifications include AWS Certified Data Engineer — Associate, AWS Certified Solutions Architect — Associate and AWS Certified Cloud Practitioner, plus AWS Partner accreditations." },
+      { keys: ["flyrank","internship","ai","intern"], answer: "During the FlyRank AI internship, Haritha worked on Applied Search Intelligence: Google Search Ranking & Discoverability, building an analytical ML workflow and evaluating ranking-related features." },
+      { keys: ["education","msc","degree","dcu"], answer: "Haritha is completing an MSc in Computing Data Analytics at Dublin City University and holds a B.Tech in Computer Science and Engineering." }
+    ];
+
+    function answerQuestion(question) {
+      const q = question.toLowerCase().trim();
+      if (!q) return "Please ask a question about Haritha's experience, projects, skills or certifications.";
+      const scored = knowledge.map(item => ({
+        item,
+        score: item.keys.reduce((score, key) => score + (q.includes(key) ? (key.length > 4 ? 3 : 2) : 0), 0)
+      })).sort((a,b) => b.score - a.score);
+      if (scored[0].score === 0) return "I can answer questions about Haritha's Data Engineering experience, AWS, PySpark, Kafka, Airflow, dbt, Databricks, Snowflake, projects, certifications, education and FlyRank work.";
+      return scored[0].item.answer;
+    }
+
+    function askAI(question) {
+      response.textContent = "Thinking…";
+      aiAsk.disabled = true;
+      window.setTimeout(() => {
+        response.textContent = answerQuestion(question);
+        aiAsk.disabled = false;
+      }, 220);
+    }
+
+    aiAsk.addEventListener("click", () => askAI(aiInput.value));
+    aiInput.addEventListener("keydown", event => { if (event.key === "Enter") askAI(aiInput.value); });
+
+    document.querySelectorAll(".question").forEach(button => {
+      button.addEventListener("click", () => {
+        aiInput.value = button.textContent.trim();
+        askAI(aiInput.value);
+      });
+    });
+  </script>
+</body>
+</html>
